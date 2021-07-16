@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  mysql: #ここはただの名前なのでdbとかdatabaseとかでもよい
+    image: mysql:latest
+    platform: linux/x86_64　
+    #M1の場合これ必要
+    command: --default-authentication-plugin=mysql_native_password
+    # mysql８以降に必要なコード。認証プラグインがcaching_sha2_passwordになるのでmysql_native_passwordに代えてあげる作業をしなければなりません。
+    ports:
+      - "3306:3306"
+      # 3306:3306左側がローカルでDocker上のポートで紐づけています。
+    volumes:
+      - "./mysql-data:/var/lib/mysql"
+      # mysqlの設定を永続化する
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  app: #コンテナの名前です
+    build: .
+    volumes:
+      - ".:/app"
+      # mysqlの設定を永続化する
+    ports:
+      - "3000:3000"
+    tty: true
+    depends_on:
+      - mysql
