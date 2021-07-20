@@ -16,6 +16,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
   app: #コンテナの名前です
     build: .
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - ".:/app"
       # mysqlの設定を永続化する

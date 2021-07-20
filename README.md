@@ -23,3 +23,7 @@ Things you may want to cover:
 
 * ...
 # docker
+
+<!-- 1 docker-compose up -d -->
+<!-- 2 rails s -b 0.0.0.0 -->
+<!-- 後ほど↑も一行程にしたい -->
